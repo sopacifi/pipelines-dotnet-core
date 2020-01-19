@@ -26,10 +26,11 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
-- task: AzureRmWebAppDeployment@4
+
+- task: AzureWebApp@1
   inputs:
-    ConnectionType: 'AzureRM'
     azureSubscription: 'Microsoft Azure Internal Consumption(22dee812-3991-4041-8781-a05f054097ef)'
     appType: 'webAppLinux'
-    WebAppName: 'netCoreSopacifi'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    appName: 'netCoreSopacifi'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+    runtimeStack: 'DOTNETCORE|3.0'
